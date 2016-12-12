@@ -1,0 +1,17 @@
+#
+# elasticsearch-master.yml
+#
+#
+
+# Cluster name
+cluster.name: elk2
+
+# Bind adress to all IPs
+network.host: 0.0.0.0
+
+# Publish address to localhost.
+# Required for sniffing.
+network.publish_host: 127.0.0.1
+
+# Pass an initial list of hosts to perform discovery
+discovery.zen.ping.unicast.hosts: [ "master" ]

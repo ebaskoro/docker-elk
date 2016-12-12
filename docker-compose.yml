@@ -3,10 +3,32 @@
 #
 #
 
-elk:
-  image: ebaskoro/elk:v2.4.1
-  ports:
-    - "0.0.0.0:5601:5601"
-    - "0.0.0.0:9200:9200"
-    - "0.0.0.0:5044:5044"
-    - "0.0.0.0:5000:5000"
+version: '2'
+
+services:
+
+  alpha:
+    image: ebaskoro/elk:v2.4.1
+    ports:
+      - "0.0.0.0:5601:5601"
+      - "0.0.0.0:9200:9200"
+      - "0.0.0.0:5044:5044"
+      - "0.0.0.0:5000:5000"
+
+  beta:
+    image: ebaskoro/elk:v2.4.1
+    depends_on:
+      - alpha
+    volumes:
+      - ./elasticsearch-slave.yml:/etc/elasticsearch/elasticsearch.yml:ro
+    links:
+      - alpha:master
+
+  gamma:
+    image: ebaskoro/elk:v2.4.1
+    depends_on:
+      - alpha
+    volumes:
+      - ./elasticsearch-slave.yml:/etc/elasticsearch/elasticsearch.yml:ro
+    links:
+      - alpha:master
