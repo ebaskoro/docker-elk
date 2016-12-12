@@ -53,7 +53,7 @@
 #
 # network.host: 192.168.0.1
 network.host: 0.0.0.0
-network.publish_host: 0.0.0.0
+network.publish_host: 127.0.0.1
 #
 # Set a custom port for HTTP:
 #

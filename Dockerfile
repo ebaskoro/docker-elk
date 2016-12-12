@@ -5,13 +5,15 @@
 
 FROM sebp/elk:es241_l240_k461
 
+ENV ES_HOME /usr/share/elasticsearch
+
 # Install Marvel
-RUN /usr/share/elasticsearch/bin/plugin install license \
- && /usr/share/elasticsearch/bin/plugin install marvel-agent \
- && ${KIBANA_HOME}/bin/kibana plugin --install elasticsearch/marvel/latest
+RUN gosu elasticsearch ${ES_HOME}/bin/plugin install license \
+ && gosu elasticsearch ${ES_HOME}/bin/plugin install marvel-agent \
+ && gosu kibana ${KIBANA_HOME}/bin/kibana plugin --install elasticsearch/marvel/latest
 
 # Install Sense
-RUN ${KIBANA_HOME}/bin/kibana plugin --install elastic/sense
+RUN gosu kibana ${KIBANA_HOME}/bin/kibana plugin --install elastic/sense
 
 # Configure Elasticsearch
 ADD elasticsearch.yml /etc/elasticsearch/elasticsearch.yml
