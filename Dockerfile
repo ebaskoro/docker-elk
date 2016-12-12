@@ -15,5 +15,9 @@ RUN gosu elasticsearch ${ES_HOME}/bin/plugin install license \
 # Install Sense
 RUN gosu kibana ${KIBANA_HOME}/bin/kibana plugin --install elastic/sense
 
-# Configure Elasticsearch
+# Configure Elasticsearch for a master node
 ADD elasticsearch-master.yml /etc/elasticsearch/elasticsearch.yml
+
+# Override the startup script
+ADD start.sh /usr/local/bin/start.sh
+RUN chmod +x /usr/local/bin/start.sh

@@ -14,6 +14,8 @@ services:
       - "0.0.0.0:9200:9200"
       - "0.0.0.0:5044:5044"
       - "0.0.0.0:5000:5000"
+    environment:
+      - ES_CONNECT_RETRY=60
 
   beta:
     image: ebaskoro/elk:v2.4.1
@@ -23,6 +25,8 @@ services:
       - ./elasticsearch-slave.yml:/etc/elasticsearch/elasticsearch.yml:ro
     links:
       - alpha:master
+    environment:
+      - ES_CONNECT_RETRY=60
 
   gamma:
     image: ebaskoro/elk:v2.4.1
@@ -32,3 +36,5 @@ services:
       - ./elasticsearch-slave.yml:/etc/elasticsearch/elasticsearch.yml:ro
     links:
       - alpha:master
+    environment:
+      - ES_CONNECT_RETRY=60
