@@ -1,0 +1,25 @@
+#
+# elasticsearch-master-max_content_length.yml
+#
+#
+
+# Cluster name
+cluster.name: elk2
+
+# Bind adress to all IPs
+network.host: 0.0.0.0
+
+# Publish address to localhost.
+# Required for sniffing.
+network.publish_host: 127.0.0.1
+
+# Override max max_content_length
+http.max_content_length: 500mb
+
+# Override
+index.query.bool.max_clause_count: 40000
+
+# Enable script update
+script.engine.groovy.inline.update: on
+
+path.repo: ["/var/lib/elasticsearch"]
